@@ -1,12 +1,10 @@
-import { saveSystem } from "./save";
 import { computeRank } from "./utils";
 
 export function makeScoreBox(k, pos, score) {
-    saveSystem().load();
-    console.log("Current score:", score);
-    if (score > saveSystem().data.maxScore) {
-        saveSystem().data.maxScore = score;
-        saveSystem().save();
+    let maxScore = JSON.parse(localStorage.getItem('maxScore'));
+    if (score > maxScore) {
+        maxScore = score;
+        localStorage.setItem('maxScore', JSON.stringify(score));
     }
 
     const container = k.make([
@@ -21,7 +19,7 @@ export function makeScoreBox(k, pos, score) {
     ]);
 
     container.add([
-        k.text(`Previous Best Score : ${saveSystem().data.maxScore}`, { size: 18 }),
+        k.text(`Previous Best Score : ${maxScore}`, { size: 18 }),
         k.color(k.Color.fromHex("#c65708")),
         k.area(),
         k.pos(-240, -200),
@@ -42,7 +40,7 @@ export function makeScoreBox(k, pos, score) {
     ]);
 
     container.add([
-        k.text(`Previous Best Rank : ${computeRank(saveSystem().data.maxScore)}`, { size: 18 }),
+        k.text(`Previous Best Rank : ${computeRank(maxScore)}`, { size: 18 }),
         k.color(k.Color.fromHex("#c65708")),
         k.area(),
         k.pos(-240, 0),

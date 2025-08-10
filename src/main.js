@@ -2,7 +2,6 @@ import kaplay from 'kaplay';
 import { makeBackground } from './utils';
 import { SACLE_FACTOR } from './constants';
 import { makePlayer } from './player';
-import { saveSystem } from './save';
 import { makeScoreBox } from './makeScoreBox';
 
 const k = kaplay({
@@ -96,10 +95,10 @@ scene("start", async () => {
   k.onKeyPress("space", playGame);
   k.onGamepadButtonPress("south", playGame);
 
-  saveSystem().load();
-  if (!saveSystem().data.maxScore) {
-    saveSystem().data.maxScore = 0;
-    saveSystem().save();
+  const saved = JSON.parse(localStorage.getItem('maxScore'));
+
+  if(!saved) {
+    localStorage.setItem('maxScore', JSON.stringify(0));
   }
 
   k.scene("main", async () => {
