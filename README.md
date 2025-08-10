@@ -9,10 +9,6 @@ A fun browser-based game built with [Kaplay](https://github.com/replit/kaplay) a
 - Save system for high scores
 - Responsive design
 
-## Snap
-
-![Khusi Bird Gameplay](public/snippet.png)
-
 ## Getting Started
 
 ### Prerequisites
@@ -79,4 +75,9 @@ The output will be in the `dist/` folder.
 ├── package.json    # Project metadata and scripts
 └── README.md       # This file
 ```
+
+## Snap
+
+![Khusi Bird Gameplay](public/Snippet.png)
+
 Enjoy playing Khusi Bird!
