@@ -137,18 +137,19 @@ scene("start", async () => {
         platforms.speed += 30;
       }
     });
-
+  
     k.loop(1, () => {
       score += 1;
     });
-
-    for (const collider of collidersData) {
+ 
+    for (let i = 0; i < collidersData.length; i++) {
+      const collider = collidersData[i];
       platforms.add([
         k.area({
           shape: new k.Rect(k.vec2(0), collider.width, collider.height),
         }),
         k.body({ isStatic: true }),
-        k.pos(collider.x, collider.y),
+        k.pos(collider.x + i * collider.gap, collider.y),
         "bg",
       ]);
     }
@@ -165,7 +166,7 @@ scene("start", async () => {
       // k.play("hurt");
       platforms.speed = 0;
       player.disableControls();
-      k.add(makeScoreBox(k, k.center(), score));
+      k.add(makeScoreBox(k, k.center(), score)); 
       player.isDead = true;
     });
 
