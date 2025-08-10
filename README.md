@@ -78,6 +78,6 @@ The output will be in the `dist/` folder.
 
 ## Snap
 
-![Khusi Bird Gameplay](public/Snippet.png)
+![Khusi Bird Gameplay](public/snap.png)
 
 Enjoy playing Khusi Bird!
