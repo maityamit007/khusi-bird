@@ -4,20 +4,25 @@ export function makeBackground(k) {
 
 export function computeRank(score) {
   if (score > 30) {
-    return "S";
+    return "S Tier";
   }
 
   if (score > 20) {
-    return "A";
+    return "A Tier";
   }
 
   if (score > 10) {
-    return "B";
+    return "B Tier";
   }
 
   if (score > 2) {
-    return "C";
+    return "C Tier";
   }
 
-  return "D";
+  return "Try Again";
+}
+
+export function goToGame(k) {
+  k.play("confirm");
+  k.go("main");
 }

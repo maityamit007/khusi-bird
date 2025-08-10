@@ -1,20 +1,13 @@
-// import { BaseDirectory, writeTextFile } from '@tauri-apps/api/fs';
-
 export function saveSystem(saveFileName = "save.json") {
     return {
         data: {},
-        async save() {
-            await writeTextFile(saveFileName, JSON.stringify(this.data), {
-                dir: BaseDirectory.AppLocalData,
-            })
+        save() {
+            localStorage.setItem(saveFileName, JSON.stringify(this.data));
         },
-        async load() {
+        load() {
             try {
-                this.data = JSON.parse(
-                    await readTextFile(saveFileName, {
-                        dir: BaseDirectory.AppLocalData
-                    })
-                )
+                const saved = localStorage.getItem(saveFileName);
+                this.data = saved ? JSON.parse(saved) : {};
             } catch {
                 this.data = {};
             }

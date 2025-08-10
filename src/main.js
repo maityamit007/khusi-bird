@@ -20,28 +20,11 @@ const {
   sprite,
   pos,
   go,
-  color,
   scale,
-  rect,
-  width,
-  height,
   z,
 } = k;
 
-loadSprite("flares", "./flares.png",
-  //   {
-  //   sliceX: 6,
-  //   anims: {
-  //     burn: {
-  //       from: 0,
-  //       to: 5,
-  //       loop: true,
-  //       speed: 8,
-  //     },
-  //   },
-  // }
-
-);
+loadSprite("flares", "./flares.png");
 
 loadSprite("bg", "./bg.png");
 loadSprite("khusibird", "./khusibird.png");
@@ -86,7 +69,7 @@ scene("start", async () => {
   map.add([sprite('bg'), k.pos(), k.area(), { speed: 100 }, z(4)])
 
   const player = k.add(makePlayer(k))
-  player.pos = k.vec2(k.center().x - 350, k.center().y + 86);
+  player.pos = k.vec2(k.center().x - 370, k.center().y + 86);
 
   const playBtn = k.add([
     k.rect(200, 50, { radius: 3 }),
@@ -106,7 +89,6 @@ scene("start", async () => {
 
   const playGame = () => {
     // k.play("confirm");
-
     k.go("main");
   };
 
@@ -114,11 +96,11 @@ scene("start", async () => {
   k.onKeyPress("space", playGame);
   k.onGamepadButtonPress("south", playGame);
 
-  // await saveSystem.load();
-  // if (!saveSystem.data.maxScore) {
-  //   saveSystem.data.maxScore = 0;
-  //   await saveSystem.save();
-  // }
+  saveSystem().load();
+  if (!saveSystem().data.maxScore) {
+    saveSystem().data.maxScore = 0;
+    saveSystem().save();
+  }
 
   k.scene("main", async () => {
     let score = 0;
@@ -184,7 +166,7 @@ scene("start", async () => {
       // k.play("hurt");
       platforms.speed = 0;
       player.disableControls();
-      k.add(await makeScoreBox(k, k.center(), score));
+      k.add(makeScoreBox(k, k.center(), score));
       player.isDead = true;
     });
 
